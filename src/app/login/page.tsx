@@ -1,6 +1,6 @@
 export default async function LoginPage() {
   const clientId = process.env.CLIENT_ID; // safe to expose
-  const redirectUri = "http://localhost:3000/callback";
+  const redirectUri = process.env.MODE == "development" ? "http://localhost:3000/callback" : "https://strava-cards.vercel.app/callback";
 
   const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&approval_prompt=force&scope=read,activity:read_all`;
 
