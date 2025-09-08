@@ -5,10 +5,10 @@ export function formatMovingTime(seconds: number): string {
 
   if (h > 0) {
     // hh:mm:ss
-    return `${h}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`
+    return `${h}h ${m.toString().padStart(2, "0")}m ${s.toString().padStart(2, "0")}s`
   } else if (m > 0) {
     // m:ss
-    return `${m}:${s.toString().padStart(2, "0")}`
+    return `${m}m ${s.toString().padStart(2, "0")}s`
   } else {
     // just seconds
     return `${s}s`
