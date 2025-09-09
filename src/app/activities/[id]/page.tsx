@@ -1,3 +1,5 @@
+import StravaCard from "@/components/strava-card";
+import { dmSans } from "@/fonts";
 import { cookies } from "next/headers";
 
 interface ActivityPageProps {
@@ -28,13 +30,15 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
   console.log(run);
 
   return (
-    <div className="p-6">
-      <p>Activity ID hahah</p>
-          <div className="p-2">
-            <p>Name: {run.name}</p>
-            <p>Distance: {(run.distance/1000).toFixed(1)}K</p>
-            <p>Avg Heart Rate: {run.average_heartrate} bpm</p>
-          </div>
+    <div className="px-2">
+      <div className="flex flex-col items-center w-full py-2">
+        <div className="max-w-3xl w-full flex flex-col gap-4">
+          <h1 className={dmSans.className + " font-bold text-xl"}>
+            MY BROTHER
+          </h1>
+          <StravaCard run={run} />
+        </div>
+      </div>
     </div>
   );
 }
