@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
-import { dmSans, instrument, JBMono } from "../fonts";
+import { JBMono } from "../fonts";
 import { formatDistance, formatMovingTime, formatPace } from "@/utils/utils";
 
 const PER_PAGE = 15;
@@ -31,7 +31,7 @@ export default async function Home({ searchParams }: any) {
     <div className="px-2">
       <div className="flex flex-col items-center w-full py-2">
         <div className="max-w-3xl w-full flex flex-col gap-4">
-          <h1 className={dmSans.className + " font-bold text-xl"}>
+          <h1 className={" font-bold text-xl"}>
             ACTIVITIES
           </h1>
           {data?.map((run: any, idx: number) => {
@@ -43,7 +43,7 @@ export default async function Home({ searchParams }: any) {
               >
                 <p
                   className={
-                    dmSans.className +
+                     
                     " font-bold text-lg border-b border-dashed px-2 mb-2 bg-neutral-100"
                   }
                 >
