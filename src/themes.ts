@@ -26,16 +26,28 @@ export const GruvBox: CardStyles = {
     borderColor: "#fabd2f",
 }
 
+export const Nord: CardStyles = {
+    bgColor: "#2e3440",
+    labelColor: "#d8dee9",
+    textColor: "#eceff4",
+    borderColor: "#88c0d0"
+}
+
 let themes: Themes[] = []
 
 themes.push({
-    name: "Rose Pine",
+    name: "ROSE PINE",
     theme: RosePine
 })
 
 themes.push({
-    name: "Gruvbox",
+    name: "GRUVBOX",
     theme: GruvBox
+})
+
+themes.push({
+    name: "NORD",
+    theme: Nord
 })
 
 export default themes;

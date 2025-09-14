@@ -2,109 +2,122 @@
 
 import { JBMono } from "@/fonts";
 import { formatDistance, formatMovingTime, formatPace } from "@/utils/utils";
-import React, { useState } from "react";
-import ColorPalette from "./color-palette";
-import { Compact } from "@uiw/react-color";
-import themes, { CardStyles, GruvBox, RosePine } from "@/themes";
+import React, { useRef, useState } from "react";
+import themes, { CardStyles, GruvBox, Nord, RosePine } from "@/themes";
+import ColorPicker from "./color-picker";
+import html2canvas from "html2canvas";
+import StatCard from "./stat-card";
+import MinimalCard from "./minimal-card";
 
-
+//  shadow-[3px_3px_0px_rgba(0,0,0,0.4)]
 const StravaCard = ({ run }: any) => {
-  const [cardStyle, setCardStyle] = useState<CardStyles>(GruvBox);
+  const [cardStyle, setCardStyle] = useState<CardStyles>(Nord);
+  const [isMinimal, setIsMinimal] = useState<Boolean>(false);
+
+  const cardRef = useRef(null);
 
   console.count("render");
 
+  const handleCapture = async () => {
+    if (!cardRef.current) return;
+
+    const canvas = await html2canvas(cardRef.current, { allowTaint: true });
+    const dataURL = canvas.toDataURL("image/png");
+
+    const link = document.createElement("a");
+    link.href = dataURL;
+    link.download = "screenshot.png";
+    link.click();
+  };
+
   return (
     <div className={JBMono.className}>
-      <div
-        className={
-          JBMono.className + " p-2 shadow-[3px_3px_0px_rgba(0,0,0,0.4)] "
-        }
-        style={{
-          backgroundColor: cardStyle.bgColor,
-          color: cardStyle.textColor,
-        }}
-      >
-        <div
-          className="border-2 border-dashed p-2"
-          style={{ borderColor: cardStyle.borderColor }}
+      <div className="flex gap-4 my-2">
+        <button
+          onClick={() => {
+            setIsMinimal(false);
+          }}
+          className="border px-2 hover:bg-black hover:text-white cursor-pointer"
         >
-          <p className="text-xl font-bold mb-4" >{run.name.toUpperCase()}</p>
-          <div className="my-2">
-            <p style={{ color: cardStyle.labelColor }}>DISTANCE</p>
-            <p className="text-5xl font-bold">
-              {formatDistance(run.distance)}K
-            </p>
-          </div>
-          <div className="mt-6">
-            <p
-              className="border-2 border-b-0 text-center font-medium"
-              style={{ borderColor: cardStyle.borderColor, color: cardStyle.labelColor }}
-            >
-              STATISTICS
-            </p>
-            <div className="grid grid-cols-2 font-medium">
-              <div
-                className="border-2 border-r-0 p-1"
-                style={{ borderColor: cardStyle.borderColor, color: cardStyle.labelColor }}
-              >
-                <p>PACE</p>
-                <p>MOVING TIME</p>
-                <p>ELAPSED TIME</p>
-                <p>ELEVATION GAIN</p>
-                <p>AVG HEARTRATE</p>
-              </div>
-              <div
-                className="border-2 border-l-0 p-1"
-                style={{ borderColor: cardStyle.borderColor }}
-              >
-                <p>{formatPace(run.average_speed)}</p>
-                <p>{formatMovingTime(run.moving_time)}</p>
-                <p>{formatMovingTime(run.elapsed_time)}</p>
-                <p>{run.total_elevation_gain} meters</p>
-                <p>{run.average_heartrate.toFixed(0)} BPM</p>
-              </div>
-            </div>
-          </div>
-          {/* <div className="my-1">
-            <ColorPalette />
-          </div> */}
-        </div>
+          {isMinimal ? null : "*"}DETAILED
+        </button>
+        <button
+          onClick={() => {
+            setIsMinimal(true);
+          }}
+          className="border px-2 hover:bg-black hover:text-white cursor-pointer"
+        >
+          {isMinimal ? "*" : null}MINIMAL
+        </button>
       </div>
 
-      <div className="flex items-center justify-center m-2">
-        <Compact
-          style={{
-            border: "1px solid",
-            borderRadius: "0",
-            width: "100%",
-            flexDirection: "column",
-            backgroundColor: "white"
-          }}
-          colors={["#000", "#fff", "#f00"]}
-          color={cardStyle.bgColor}
-          onChange={(color) => {
-            console.log("new color", color.hex);
-            setCardStyle((prev) => ({ ...prev, bgColor: color.hex }));
-          }}
-          rectProps={{
-            style: { borderRadius: 0 } // ⬅️ removes rounded corners
-          }}
-        />
-      </div>
+      {isMinimal ? (
+        <MinimalCard cardRef={cardRef} cardStyle={cardStyle} run={run} />
+      ) : (
+        <StatCard cardRef={cardRef} cardStyle={cardStyle} run={run} />
+      )}
 
-      <div className="flex flex-col gap-2">
-        <label>
-          THEME
-          <select>
-            <option disabled>THEME</option>
-            {themes.map((theme) => {
-              return (
-                <option onClick={() => setCardStyle(theme.theme)}>{theme.name}</option>
-              )
+      <div className="my-4 flex justify-between">
+        <div>
+          <label className="mr-2 font-medium">THEME =</label>
+          <select
+            onChange={(e) => {
+              const selectedTheme = themes.find(
+                (t) => t.name === e.target.value
+              );
+              if (selectedTheme) {
+                setCardStyle(selectedTheme.theme);
+              }
+            }}
+          >
+            {themes.map((theme, idx) => {
+              return <option key={idx}>{theme.name}</option>;
             })}
           </select>
-        </label>
+        </div>
+
+        <button
+          onClick={handleCapture}
+          className="w-fit m-1 px-2 bg-orange-500 text-white border border-black hover:bg-black font-bold  shadow-[3px_3px_0px_rgba(0,0,0,0.4)]"
+        >
+          DOWNLOAD
+        </button>
       </div>
+
+      <ColorPicker
+        label="TEXT COLOR"
+        value={cardStyle.textColor}
+        colors={["#000", "#fff", "#f00"]}
+        onChange={(newColor) =>
+          setCardStyle((prev) => ({ ...prev, textColor: newColor }))
+        }
+      />
+      <ColorPicker
+        label="LABEL COLOR"
+        value={cardStyle.labelColor}
+        colors={["#000", "#fff", "#f00"]}
+        onChange={(newColor) =>
+          setCardStyle((prev) => ({ ...prev, labelColor: newColor }))
+        }
+      />
+
+      <ColorPicker
+        label="BORDER COLOR"
+        value={cardStyle.borderColor}
+        colors={["#000", "#fff", "#f00"]}
+        onChange={(newColor) =>
+          setCardStyle((prev) => ({ ...prev, borderColor: newColor }))
+        }
+      />
+
+      <ColorPicker
+        label="BG COLOR"
+        value={cardStyle.bgColor}
+        colors={["#000", "#fff", "#f00"]}
+        onChange={(newColor) =>
+          setCardStyle((prev) => ({ ...prev, bgColor: newColor }))
+        }
+      />
     </div>
   );
 };
