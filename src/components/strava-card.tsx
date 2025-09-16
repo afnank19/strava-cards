@@ -33,6 +33,7 @@ const StravaCard = ({ run }: any) => {
   return (
     <div className={JBMono.className}>
       <div className="flex gap-4 my-2">
+        <p className="font-medium ">CARD TYPE:</p>
         <button
           onClick={() => {
             setIsMinimal(false);
@@ -100,7 +101,6 @@ const StravaCard = ({ run }: any) => {
           setCardStyle((prev) => ({ ...prev, labelColor: newColor }))
         }
       />
-
       <ColorPicker
         label="BORDER COLOR"
         value={cardStyle.borderColor}
@@ -109,7 +109,6 @@ const StravaCard = ({ run }: any) => {
           setCardStyle((prev) => ({ ...prev, borderColor: newColor }))
         }
       />
-
       <ColorPicker
         label="BG COLOR"
         value={cardStyle.bgColor}
