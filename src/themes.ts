@@ -33,6 +33,13 @@ export const Nord: CardStyles = {
     borderColor: "#88c0d0"
 }
 
+export const EverForest: CardStyles = {
+    bgColor: "#1E2326",
+    labelColor: "#D3C6AA",
+    textColor: "#D3C6AA",
+    borderColor: "#A7C080"
+}
+
 let themes: Themes[] = []
 
 themes.push({
@@ -48,6 +55,11 @@ themes.push({
 themes.push({
     name: "NORD",
     theme: Nord
+})
+
+themes.push({
+    name: "EVERFOREST",
+    theme: EverForest
 })
 
 export default themes;

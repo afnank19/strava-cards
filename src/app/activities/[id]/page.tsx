@@ -34,7 +34,7 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
       <div className="flex flex-col items-center w-full py-2">
         <div className="max-w-3xl w-full flex flex-col gap-4">
           <h1 className={" font-bold text-xl border-b-2  " + JBMono.className}>
-            YOUR RUN DETAILS
+            [YOUR RUN DETAILS]
           </h1>
           <StravaCard run={run} />
         </div>

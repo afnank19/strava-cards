@@ -31,8 +31,8 @@ export default async function Home({ searchParams }: any) {
     <div className="px-2">
       <div className="flex flex-col items-center w-full py-2">
         <div className="max-w-3xl w-full flex flex-col gap-4">
-          <h1 className={" font-bold text-xl"}>
-            ACTIVITIES
+          <h1 className={" font-bold text-xl " + JBMono.className }>
+            [ACTIVITIES]
           </h1>
           {data?.map((run: any, idx: number) => {
             return (
@@ -60,11 +60,11 @@ export default async function Home({ searchParams }: any) {
                     <p>ELAPSED TIME = {formatMovingTime(run.elapsed_time)}</p>
                   </div>
                 </div>
-                <div className="flex justify-between">
-                  <div className="w-fit m-1 bg-orange-500 text-white border hover:bg-black font-bold">
+                <div className="flex justify-between m-1">
+                  <div className="w-fit m-1 bg-orange-500 text-white border border-black  hover:bg-black font-bold shadow-[3px_3px_0px_rgba(0,0,0,0.4)]">
                     <Link href={`/activities/${run.id}`} className="px-2">DETAILS</Link>
                   </div>
-                  <div className="w-fit m-1 border-black  border hover:bg-black hover:text-white font-medium">
+                  <div className="w-fit m-1 border-black  border hover:bg-black hover:text-white font-medium ">
                     <a href={`https://strava.com/activities/${run.id}`} className="px-2">VIEW ON STRAVA</a>
                   </div>
                 </div>
@@ -74,12 +74,12 @@ export default async function Home({ searchParams }: any) {
           })}
           <div className={"flex justify-between pt-2 "+JBMono.className}>
             {page > 1 && (
-              <Link href={`/?page=${page - 1}`} className="px-2 m-1 border-black  border hover:bg-black hover:text-white font-bold">
+              <Link href={`/?page=${page - 1}`} className="px-2 m-1 border-black  border hover:bg-black hover:text-white font-bold shadow-[3px_3px_0px_rgba(0,0,0,0.4)]">
                 Previous
               </Link>
             )}
             {data.length > 0 && (
-              <Link href={`/?page=${page + 1}`} className="px-2 m-1 border-black  border hover:bg-black hover:text-white font-bold">
+              <Link href={`/?page=${page + 1}`} className="px-2 m-1 border-black  border hover:bg-black hover:text-white font-bold shadow-[3px_3px_0px_rgba(0,0,0,0.4)]">
                 Next
               </Link>
             )}
