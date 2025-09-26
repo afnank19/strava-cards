@@ -20,7 +20,7 @@ const MinimalCard = ({ cardStyle, run, cardRef }: StatCardProps) => {
         <p className="text-xl font-bold mb-4">{run.name.toUpperCase()}</p>
         <div className="my-2 flex gap-12">
             <div>
-                <p style={{ color: cardStyle.labelColor }}>DIST.</p>
+                <p style={{ color: cardStyle.labelColor }}>DIST</p>
                 <p className="text-xl font-bold">{formatDistance(run.distance)}K</p>
             </div>
             <div>

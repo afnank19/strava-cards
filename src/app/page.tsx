@@ -60,21 +60,26 @@ export default async function Home({ searchParams }: any) {
                     <p>ELAPSED TIME = {formatMovingTime(run.elapsed_time)}</p>
                   </div>
                 </div>
-                <div className="w-fit m-1 bg-orange-500 text-white border hover:bg-black font-bold">
-                  <Link href={`/activities/${run.id}`} className="px-2">DETAILS</Link>
+                <div className="flex justify-between">
+                  <div className="w-fit m-1 bg-orange-500 text-white border hover:bg-black font-bold">
+                    <Link href={`/activities/${run.id}`} className="px-2">DETAILS</Link>
+                  </div>
+                  <div className="w-fit m-1 border-black  border hover:bg-black hover:text-white font-medium">
+                    <a href={`https://strava.com/activities/${run.id}`} className="px-2">VIEW ON STRAVA</a>
+                  </div>
                 </div>
               </div>
               // </Link>
             );
           })}
-          <div className="flex justify-between mt-4">
+          <div className={"flex justify-between pt-2 "+JBMono.className}>
             {page > 1 && (
-              <Link href={`/?page=${page - 1}`} className="px-3 py-1 border">
+              <Link href={`/?page=${page - 1}`} className="px-2 m-1 border-black  border hover:bg-black hover:text-white font-bold">
                 Previous
               </Link>
             )}
             {data.length > 0 && (
-              <Link href={`/?page=${page + 1}`} className="px-3 py-1 border">
+              <Link href={`/?page=${page + 1}`} className="px-2 m-1 border-black  border hover:bg-black hover:text-white font-bold">
                 Next
               </Link>
             )}

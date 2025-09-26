@@ -22,7 +22,7 @@ const colorPalette = [
   "#ffd000", // Yellow
   "#00DD00", // Green
   "#00897B", // Teal
-  "#00c8ff", // Blue
+  "#0000ff", // Blue
   "#3949AB", // Indigo
   "#8E24AA", // Purple
   "#D81B60", // Pink
