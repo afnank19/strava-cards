@@ -30,3 +30,12 @@ export function formatPace(avgSpeed: number): string {
 export function formatDistance(distance: number): string {
     return `${(distance/1000).toFixed(2)}`
 }
+
+export function formatRideSpeed(avgSpeed: number): string {
+  if (!avgSpeed || avgSpeed <= 0) return "-"
+
+  // Converting m/s into KM/h
+  const rideSpeed = avgSpeed * 3.6;
+
+  return `${rideSpeed.toFixed(1)} Km/h`
+}

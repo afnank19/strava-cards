@@ -1,4 +1,4 @@
-import {  JetBrains_Mono } from "next/font/google";
+import {  DM_Sans, JetBrains_Mono, Manrope } from "next/font/google";
 
 // export const instrument = Instrument_Serif({
 //   subsets: ["latin"],
@@ -11,4 +11,12 @@ import {  JetBrains_Mono } from "next/font/google";
 
 export const JBMono = JetBrains_Mono({
   subsets: ["latin"],
+})
+
+export const DMSans = DM_Sans({
+  subsets: ["latin"]
+})
+
+export const MR = Manrope({
+  subsets: ["latin"]
 })

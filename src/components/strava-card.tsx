@@ -3,7 +3,7 @@
 import { JBMono } from "@/fonts";
 import { formatDistance, formatMovingTime, formatPace } from "@/utils/utils";
 import React, { useRef, useState } from "react";
-import themes, { CardStyles, GruvBox, Nord, RosePine } from "@/themes";
+import themes, { CardStyles, GruvBox, JetBlack, Nord, PastelGreen, RosePine } from "@/themes";
 import ColorPicker from "./color-picker";
 import html2canvas from "html2canvas";
 import StatCard from "./stat-card";
@@ -11,7 +11,7 @@ import MinimalCard from "./minimal-card";
 
 //  shadow-[3px_3px_0px_rgba(0,0,0,0.4)]
 const StravaCard = ({ run }: any) => {
-  const [cardStyle, setCardStyle] = useState<CardStyles>(Nord);
+  const [cardStyle, setCardStyle] = useState<CardStyles>(JetBlack);
   const [isMinimal, setIsMinimal] = useState<Boolean>(false);
 
   const cardRef = useRef(null);
@@ -21,7 +21,7 @@ const StravaCard = ({ run }: any) => {
   const handleCapture = async () => {
     if (!cardRef.current) return;
 
-    const canvas = await html2canvas(cardRef.current, { allowTaint: true });
+    const canvas = await html2canvas(cardRef.current, { allowTaint: true, backgroundColor: null });
     const dataURL = canvas.toDataURL("image/png");
 
     const link = document.createElement("a");

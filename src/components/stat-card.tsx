@@ -1,6 +1,6 @@
 import { JBMono } from "@/fonts";
 import { CardStyles } from "@/themes";
-import { formatDistance, formatMovingTime, formatPace } from "@/utils/utils";
+import { formatDistance, formatMovingTime, formatPace, formatRideSpeed } from "@/utils/utils";
 import { Ref } from "react";
 
 export type StatCardProps = {
@@ -47,7 +47,7 @@ const StatCard = ({ cardStyle, run, cardRef }: StatCardProps) => {
                 color: cardStyle.labelColor,
               }}
             >
-              <p>PACE</p>
+              <p>{run.sport_type === "Ride" ? "AVG SPEED" : "PACE" }</p>
               <p>MOVING TIME</p>
               <p>ELAPSED TIME</p>
               <p>ELEVATION GAIN</p>
@@ -57,11 +57,11 @@ const StatCard = ({ cardStyle, run, cardRef }: StatCardProps) => {
               className="border-2 border-l-0 p-1"
               style={{ borderColor: cardStyle.borderColor }}
             >
-              <p>{formatPace(run.average_speed)}</p>
+              <p>{run.sport_type === "Ride" ? formatRideSpeed(run.average_speed) :  formatPace(run.average_speed)}</p>
               <p>{formatMovingTime(run.moving_time)}</p>
               <p>{formatMovingTime(run.elapsed_time)}</p>
               <p>{run.total_elevation_gain} meters</p>
-              <p>{run.average_heartrate.toFixed(0)} BPM</p>
+              <p>{run.average_heartrate?.toFixed(0)} BPM</p>
             </div>
           </div>
         </div>
