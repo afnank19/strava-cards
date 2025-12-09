@@ -27,8 +27,24 @@ export async function GET(req: Request) {
   const tokens = await tokenResp.json();
 
   console.log(tokens)
+
+  console.log("[+][+]", tokens.athlete)
+
+  //   const athleteResponse = await fetch(
+  //   `https://www.strava.com/api/v3/athlete`,
+  //   {
+  //     headers: {
+  //       Authorization: "Bearer " + tokensaccessToken?.value,
+  //     },
+  //   }
+  // );
+
+  // const athleteData = await athleteResponse.json()
+  // console.log("Athlete Data:", athleteData)
+
   // tokens.expires_at is epoch seconds in Strava's response
-  await setCookiesOnServer(tokens.access_token, tokens.refresh_token, tokens.expires_at);
+  // params getting too many, prolly should redo if another is needed
+  await setCookiesOnServer(tokens.access_token, tokens.refresh_token, tokens.expires_at, tokens.athlete.id);
 
   return NextResponse.redirect(new URL("/", req.url));
 }

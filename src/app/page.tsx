@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: any) {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get("strava_token");
-  console.log("acc", accessToken);
+  console.log("acc", accessToken);  
 
   const response = await fetch(
     `https://www.strava.com/api/v3/athlete/activities?page=${page}&per_page=${PER_PAGE}`,
@@ -31,9 +31,13 @@ export default async function Home({ searchParams }: any) {
     <div className="px-2">
       <div className="flex flex-col items-center w-full py-2">
         <div className="max-w-3xl w-full flex flex-col gap-4">
-          <h1 className={" font-bold text-xl " + JBMono.className }>
-            [ACTIVITIES]
-          </h1>
+          <div className="flex items-center justify-between">
+            <h1 className={" font-bold text-xl " + JBMono.className }>
+              [ACTIVITIES]
+            </h1>
+
+            <a className={" font-bold text-xl text-blue-800 underline " + JBMono.className } href="/athlete">ATHLETE STATS</a>
+          </div>
           {data?.map((run: any, idx: number) => {
             return (
               // <Link key={idx} href={`/activities/${run.id}`}>
