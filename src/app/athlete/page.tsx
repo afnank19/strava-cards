@@ -1,3 +1,4 @@
+import { MR } from "@/fonts";
 import { formatDistance, formatMovingTime } from "@/utils/utils";
 import { cookies } from "next/headers";
 
@@ -32,59 +33,102 @@ export default async function Athelete() {
   console.log("athlete stats", athleteStats);
 
   return (
-    <div className="px-2">
+    <div className={"px-2 " + MR.className}>
       <div className="flex flex-col items-center w-full py-2">
-        <div className="max-w-3xl w-full flex flex-col">
+        <div className="max-w-3xl w-full flex flex-col gap-4">
           <p>{"Hey " + data.firstname + " " + data.lastname}</p>
-          <h1>All Time</h1>
-          <p>Ride Totals</p>
-          <p>Rides: {athleteStats.all_ride_totals.count}</p>
-          <p>
-            Total Ride Distance:{" "}
-            {formatDistance(athleteStats.all_ride_totals.distance)} Km
-          </p>
-          <p>Elevation Gain: {athleteStats.all_ride_totals.elevation_gain} m</p>
-          <p>
-            Moving Time:{" "}
-            {formatMovingTime(athleteStats.all_ride_totals.moving_time)}
-          </p>
 
-          <p>Run Totals</p>
-          <p>Runs: {athleteStats.all_run_totals.count}</p>
-          <p>
-            Total Running Distance:{" "}
-            {formatDistance(athleteStats.all_run_totals.distance)} Km
-          </p>
-          <p>Elevation Gain: {athleteStats.all_run_totals.elevation_gain} m</p>
-          <p>
-            Moving Time:{" "}
-            {formatMovingTime(athleteStats.all_run_totals.moving_time)}
-          </p>
+          <div >
+            <h1 className="text-2xl font-bold">All Time Stats</h1>
+            <p className="text-lg font-bold mt-3">Ride Totals</p>
+            <p className="text-lg font-medium italic">
+              <span>{athleteStats.all_ride_totals.count + " "}</span>
+              Rides
+            </p>
+            <p className="flex items-center justify-between">
+              Total Ride Distance
+              <span>
+                {formatDistance(athleteStats.all_ride_totals.distance)} Km
+              </span>
+            </p>
+            <p className="flex items-center justify-between">
+              Elevation Gain
+              <span>{athleteStats.all_ride_totals.elevation_gain.toFixed(1)} m</span>
+            </p>
+            <p className="flex items-center justify-between">
+              Moving Time
+              <span>
+                {formatMovingTime(athleteStats.all_ride_totals.moving_time)}
+              </span>
+            </p>
+            <p className="text-lg font-bold mt-3">Run Totals</p>
+            <p className="text-lg font-medium italic">
+              <span>{athleteStats.all_run_totals.count + " "}</span>
+              Runs
+            </p>
+            <p className="flex items-center justify-between">
+              Total Running Distance
+              <span>
+                {formatDistance(athleteStats.all_run_totals.distance)} Km
+              </span>
+            </p>
+            <p className="flex items-center justify-between">
+              Elevation Gain
+              <span>{athleteStats.all_run_totals.elevation_gain.toFixed(1)} m</span>
+            </p>
+            <p className="flex items-center justify-between">
+              Moving Time
+              <span>
+                {formatMovingTime(athleteStats.all_run_totals.moving_time)}
+              </span>
+            </p>
+          </div>
 
-          <h1>Last 4 weeks</h1>
-          <p>Ride Totals</p>
-          <p>Rides: {athleteStats.recent_ride_totals.count}</p>
-          <p>
-            Total Ride Distance:{" "}
-            {formatDistance(athleteStats.recent_ride_totals.distance)} Km
-          </p>
-          <p>Elevation Gain: {athleteStats.recent_ride_totals.elevation_gain} m</p>
-          <p>
-            Moving Time:{" "}
-            {formatMovingTime(athleteStats.recent_ride_totals.moving_time)}
-          </p>
-
-          <p>Run Totals</p>
-          <p>Runs: {athleteStats.recent_run_totals.count}</p>
-          <p>
-            Total Running Distance:{" "}
-            {formatDistance(athleteStats.recent_run_totals.distance)} Km
-          </p>
-          <p>Elevation Gain: {athleteStats.recent_run_totals.elevation_gain} m</p>
-          <p>
-            Moving Time:{" "}
-            {formatMovingTime(athleteStats.recent_run_totals.moving_time)}
-          </p>
+          <div>
+            <h1 className="text-2xl font-bold">Last 4 weeks</h1>
+            <p className="text-lg font-bold mt-3">Ride Totals</p>
+            <p className="text-lg font-medium italic">
+              <span>{athleteStats.recent_ride_totals.count + " "}</span>
+              Rides
+            </p>
+            <p className="flex items-center justify-between">
+              Total Ride Distance
+              <span>
+                {formatDistance(athleteStats.recent_ride_totals.distance)} Km
+              </span>
+            </p>
+            <p className="flex items-center justify-between">
+              Elevation Gain
+              <span>{athleteStats.recent_ride_totals.elevation_gain.toFixed(1)} m</span>
+            </p>
+            <p className="flex items-center justify-between">
+              Moving Time
+              <span>
+                {formatMovingTime(athleteStats.recent_ride_totals.moving_time)}
+              </span>
+            </p>
+            <p className="text-lg font-bold mt-3">Run Totals</p>
+            <p className="text-lg font-medium italic">
+              <span>{athleteStats.recent_run_totals.count + " "}</span>
+              Runs
+            </p>
+            <p className="flex items-center justify-between">
+              Total Running Distance
+              <span>
+                {formatDistance(athleteStats.recent_run_totals.distance)} Km
+              </span>
+            </p>
+            <p className="flex items-center justify-between">
+              Elevation Gain
+              <span>{athleteStats.recent_run_totals.elevation_gain.toFixed(1)} m</span>
+            </p>
+            <p className="flex items-center justify-between">
+              Moving Time
+              <span>
+                {formatMovingTime(athleteStats.recent_run_totals.moving_time)}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
