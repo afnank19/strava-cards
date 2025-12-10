@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { JBMono } from "../fonts";
-import { formatDistance, formatMovingTime, formatPace } from "@/utils/utils";
+import { formatDistance, formatMovingTime, formatPace, formatRideSpeed } from "@/utils/utils";
 
 const PER_PAGE = 15;
 
@@ -57,7 +57,7 @@ export default async function Home({ searchParams }: any) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 p-2">
                   <div className="">
                     <p>DISTANCE = {formatDistance(run.distance)}K</p>
-                    <p>PACE = {formatPace(run.average_speed)}</p>
+                    <p>{run.sport_type === "Ride" ? "AVG SPEED" : "PACE" } = {run.sport_type === "Ride" ? formatRideSpeed(run.average_speed) :  formatPace(run.average_speed)}</p>
                   </div>
                   <div className="">
                     <p>TIME = {formatMovingTime(run.moving_time)}</p>
